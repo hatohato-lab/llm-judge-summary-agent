@@ -21,6 +21,14 @@ import json
 import sys
 from pathlib import Path
 
+# Windows コンソール(cp932)でも日本語・記号を出せるよう出力を UTF-8 に統一。
+# Linux/Mac は元から UTF-8 なので無害。これが無いと Windows で print が落ちる。
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 EVAL_DIR = Path(__file__).resolve().parent
 REQUIRED = ["faithfulness", "coverage", "conciseness", "hallucination"]
 
