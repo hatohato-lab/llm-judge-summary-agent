@@ -51,7 +51,7 @@ flowchart TD
   G -->|満たさない| F["FAIL"]
 ```
 
-このリポジトリは2つの定義を持ちます：要約役 `agent/summary-agent.md` と 審査員 `eval/judge.md`。どちらも **Claude/LLM 用の指示書**で、呼ばれて初めて動きます。
+このリポジトリは2つの定義を持ちます：要約役 `.claude/agents/summary-agent.md` と 審査員 `.claude/agents/judge.md`。どちらも **Claude/LLM 用の指示書**で、呼ばれて初めて動きます。
 
 1. **要約**：要約役に `source` を渡して `candidate.txt`（1文要約）を作る。
 2. **採点**：審査員に `source` と要約を渡し、ルーブリック（`eval/rubric.md`）で採点 → 点数（JSON）。
@@ -73,8 +73,8 @@ python eval/oracle.py --scores <採点JSONのパス>
 
 ## ファイル構成
 
-- `agent/summary-agent.md` … 要約役エージェントの定義。
-- `eval/judge.md` … 審査員（LLM-as-Judge）の定義。`eval/rubric.md` … 採点基準。
+- `.claude/agents/summary-agent.md` … 要約役エージェントの定義。
+- `.claude/agents/judge.md` … 審査員（LLM-as-Judge）の定義。`eval/rubric.md` … 採点基準。
 - `eval/oracle.py` … 合否ゲート（決定的。`--selftest` 内蔵）。
 - `eval/corpus/<ケース>/` … `source.txt`（お題）/ `good.txt`（良い要約）/ `bad_*.txt`（悪い要約の見本）。
 - `eval/selftest/` … 合否ルール検証用の採点サンプル。
